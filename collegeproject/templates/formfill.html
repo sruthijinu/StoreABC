@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+
+
+        body{
+            text-align: justify;
+            margin: auto;
+            width: 750px;
+            background-color: #1f2029;
+            color: #c4c3ca;
+            }
+        .gradient-border {
+  border-width:3px;
+  border-style:solid;
+  border-color:white;
+  padding: 3em;
+
+    </style>
+
+    <script>
+
+         function validate() {
+            var username = document.form.username;
+            var bday = document.form.bday;
+            var address = document.form.address;
+            var gender = document.form.gender;
+            var email = document.form.email;
+            var phone = document.form.phone;
+            var department = document.form.department;
+            var course = document.form.course;
+            var purpose = document.form.purpose;
+            var material = document.form.material;
+
+            if (username.value.length <= 0) {
+                alert("Name is required");
+                username.focus();
+                return false;
+            }
+            if (bday.value.length <= 0) {
+                alert("DOB is required");
+                bday.focus();
+                return false;
+            }
+             if (gender.value.length <= 0) {
+                alert("Gender is required");
+                gender.focus();
+                return false;
+            }
+            if (phone.value.length <= 0) {
+                alert("Mobile number is required");
+                phone.focus();
+                return false;
+            }
+            if (email.value.length <= 0) {
+                alert("Email Id is required");
+                email.focus();
+                return false;
+            }
+             if (address.value.length <= 0) {
+                alert("Address is required");
+                address.focus();
+                return false;
+            }
+            if(document.form.department.selectedIndex=="")
+            {
+                alert ( "Please select department!");
+                return false;
+
+            }
+            if(document.form.course.selectedIndex=="")
+            {
+                alert ( "Please select course!");
+                return false;
+
+            }
+            if(document.form.purpose.selectedIndex=="")
+            {
+                alert ( "Please select purpose!");
+                return false;
+
+            }
+            if (material.value.length <= 0) {
+                alert("material is required");
+                material.focus();
+                return false;
+            }
+
+            window.location.replace("success");
+        }
+
+        function departmentDrop()
+        {
+            var depdropdown=document.getElementById("department");
+            var coursedropdown=document.getElementById("course");
+
+            coursedropdown.innerHTML="";
+
+            var selecteddep=depdropdown.value;
+
+            var courses={
+                "ComputerScience":["courses","BTech","MTech","BCA","MCA"],
+                "Commerce":["courses","BBA","MBA"],
+                "Biotechnology":["courses","BSc","BPharm"],
+                "Economics":["courses","Bcom","BA"],
+                "Psychology":["courses","BA","BSc","PhD"]
+
+            };
+
+            var courseOptions=courses[selecteddep];
+            for (var i=0;i<courseOptions.length;i++)
+            {
+                var option=document.createElement("option");
+                option.text=courseOptions[i];
+                coursedropdown.add(option);
+            }
+        }
+
+    </script>
+</head>
+<body>
+<div class="gradient-border">
+<h2>Form</h2>
+
+<form action="success" id="form" method="post" name="form" onsubmit="return validate()" >
+	{% csrf_token %}
+
+<label> Name </label>
+<input type="text" name="username"  size="15" required="required"/> <br> <br>
+<label>
+    Enter your birthday:
+    <input type="date" name="bday" required="required" />
+  </label>
+<br>
+
+<label>
+Gender :
+<br>
+</label><br>
+<input type="radio" name="gender" value="male" required="required"/> Male <br>
+<input type="radio" name="gender" value="female" required="required"/> Female <br>
+<input type="radio" name="gender"  value="other" required="required"/> Other
+<br>
+<br>
+<label>
+Phone :
+</label>
+<input type="text" name="phone" size="10" required="required"/> <br> <br>
+Email:
+<input type="email" id="email" name="email" required="required"/> <br>
+<br> <br>
+Address
+<br>
+<textarea cols="50" rows="5" value="address" name="address" required="required">
+</textarea>
+<br> <br>
+<label>
+Department :
+</label>
+
+<select  name="department" id="department" class="department-dropdown"  onchange="departmentDrop()" >
+<option value="Department"  >Department</option>
+<option value="ComputerScience">ComputerScience</option>
+<option value="Commerce">Commerce</option>
+<option value="Biotechnology">Biotechnology</option>
+<option value="Economics">Economics</option>
+<option value="Psychology">Psychology</option>
+
+</select>
+
+<br>
+<br>
+<label>
+Course :
+</label>
+<select name="course" id="course" class="course-dropdown">
+<option value="Course">Courses</option>
+
+</select>
+
+<br>
+<br>
+
+<label>
+Purpose :
+</label>
+<select name="purpose">
+<option value="Course" >Purpose</option>
+<option value="ForEnquiry">For Enquiry</option>
+<option value="PlaceOrder">Place Order</option>
+<option value="Return">Return</option>
+
+</select>
+
+<br>
+<br>
+
+<label>
+Materials provide  :
+</label><br>
+<input type="radio" name="material" value="note" required="required"/> Notebook <br>
+<input type="radio" name="material" value="pen" required="required"/> Pen <br>
+<input type="radio" name="material" value="paper" required="required"/> Exam Paper
+<br>
+<br>
+<input type="submit" name="submit" value="Submit">
+
+
+
+</form>
+</div>
+
+</body>
+</html>

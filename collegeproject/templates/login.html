@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>login</title>
+ <style>
+    body{
+  font-family: Calibre, Helvetica, sans-serif;
+  color: #c4c3ca;
+	background-color: #1f2029;
+  text-align: left;
+            margin: auto;
+            width: 1000px;
+}
+
+ input[type=text], input[type=password] {
+        width: 50%;
+        margin: 8px 0;
+        padding: 12px 20px;
+        display: inline-block;
+        border: 1px solid blue;
+        box-sizing: border-box;
+        text-align: left;
+        margin: auto;
+    }
+
+.registerbtn {
+  background-color: blue;
+  color: white;
+  padding: 16px 20px;
+  margin: 10px 0;
+  border: none;
+  cursor: pointer;
+  width: 50%;
+  opacity: 0.3;
+}
+ </style>
+</head>
+<body>
+<form action="login" method="post" style="margin: auto; width: 950px;text-align: center; padding: 100px;width: 60%;">
+	{% csrf_token %}
+     <h2 style="margin: auto; width: 100px;text-align: justify;">  Log in  </h2><br>
+     <label> Username </label><br>
+    <input type="text" name="username" placeholder="username"><br>
+     <label> Password </label><br>
+    <input type="text" name="password" placeholder="password"><br>
+    <button type="submit" class="registerbtn">Log In</button><br>
+    <a href="register">Register here</a>
+
+</form>
+{% for msg in messages %}
+{{msg}}
+{% endfor %}
+</body>
+</html>
